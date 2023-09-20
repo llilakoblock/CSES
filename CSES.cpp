@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <map>
 
 std::vector<int64_t> CSES::weird_algorithm(int64_t n)
 {
@@ -162,7 +163,7 @@ void CSES::two_sets(int64_t n)
 	}
 	else
 	{
-		for (auto i = 0; i < (n - 1) / 2 ; ++i)
+		for (auto i = 0; i < (n - 1) / 2; ++i)
 		{
 			if (i % 2 == 0)
 			{
@@ -203,14 +204,66 @@ void CSES::two_piles(int64_t p1, int64_t p2)
 		return;
 	}
 
-	if(std::max(p1,p2) > std::min(p1, p2) * 2)
+	if (std::max(p1, p2) > std::min(p1, p2) * 2)
 	{
 		std::cout << std::endl << "NO";
 		return;
 	}
 
-	if((p1 + p2) % 3 == 0)
+	if ((p1 + p2) % 3 == 0)
 	{
 		std::cout << std::endl << "YES" << std::endl;
+	}
+}
+
+void CSES::palindrome_reorder(const std::string st)
+{
+	std::map<char, int64_t> chars_map;
+
+	for (auto i : st)
+	{
+		auto curr_val = chars_map[i];
+		chars_map.insert_or_assign(i, ++curr_val);
+	}
+
+	int64_t even_chars = 0;
+	int64_t odd_chars = 0;
+	std::pair<char, int64_t> odd_pair;
+
+	for (auto pair : chars_map)
+	{
+		if (pair.second % 2 == 0)
+		{
+			even_chars++;
+		}
+		else
+		{
+			odd_pair = pair;
+			odd_chars++;
+		}
+			
+	}
+
+	if (odd_chars > 1)
+	{
+		std::cout << "NOT POSSIBLE";
+		return;
+	}
+	else
+	{
+		std::string palindrome;
+		std::string::const_iterator itr = palindrome.begin();
+
+		for (auto pair : chars_map)
+		{
+			if (pair.second % 2 == 0)
+				palindrome.insert(itr, pair.second, pair.first);
+
+			itr = palindrome.begin() + (palindrome.size() / 2);
+		}
+
+		palindrome.insert(itr, odd_pair.second, odd_pair.first);
+		std::cout << palindrome;
+		return;
 	}
 }

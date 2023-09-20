@@ -29,6 +29,8 @@ int main()
 
 	cses.two_piles(6, 12);
 
+	cses.palindrome_reorder("AAAACACBA");
+
 
 	return 0;
 }
