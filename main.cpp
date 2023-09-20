@@ -27,6 +27,8 @@ int main()
 
 	cses.two_sets(7);
 
+	cses.two_piles(6, 12);
+
 
 	return 0;
 }

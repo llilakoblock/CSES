@@ -194,3 +194,23 @@ void CSES::two_sets(int64_t n)
 	}
 
 }
+
+void CSES::two_piles(int64_t p1, int64_t p2)
+{
+	if (p1 == p2)
+	{
+		std::cout << std::endl << "NO";
+		return;
+	}
+
+	if(std::max(p1,p2) > std::min(p1, p2) * 2)
+	{
+		std::cout << std::endl << "NO";
+		return;
+	}
+
+	if((p1 + p2) % 3 == 0)
+	{
+		std::cout << std::endl << "YES" << std::endl;
+	}
+}
